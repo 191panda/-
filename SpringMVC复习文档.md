@@ -417,6 +417,26 @@ public class OneException{
 
 # 2.springMVC 用途 ？？？？
 
+
+
+spring到过渡：
+
+当开发springMVC web项目的时候 
+
+```txt
+ServletContextListene 监听器 监听ServletContext启动时，创建IOC容器 这个是框架提供的
+可以自行写一个在Servlet的init方法中执行ApplicationContext的创建（创建IOC容器），并给Servlet的load-on-startup属性一个数字值，确保服务器启动
+Servlet就创建
+
+ContextLoaderListener 包装了ServletContextListener
+```
+
+![image-20231014222156874](C:\Users\Tang\AppData\Roaming\Typora\typora-user-images\image-20231014222156874.png)
+
+
+
+
+
 **1.介绍**
 
 - Spring Web MVC是基于Servlet API构建的原始Web框架，已被包含 从一开始就在 Spring 框架中。正式名称“Spring Web MVC”。 来自其源模块的名称 （[`Spring-WebMVC`](https://github.com/spring-projects/spring-framework/tree/main/spring-webmvc)）， 但它通常被称为“Spring MVC”。
@@ -435,6 +455,8 @@ public class OneException{
 
 
 ​	**DispatcherServle是什么？？**
+
+![image-20231016224034128](C:\Users\Tang\AppData\Roaming\Typora\typora-user-images\image-20231016224034128.png)
 
 - **DispatcherServlet是一个实际的Servlet**
 
@@ -605,7 +627,16 @@ HttpSession session = request.getSession();
   }
   ```
 
-  
+
+
+
+当请求数据是json 格式的时，怎么转成对象：指定springmvc中的消息转换器
+
+![image-20231015071910562](C:\Users\Tang\AppData\Roaming\Typora\typora-user-images\image-20231015071910562.png)
+
+
+
+
 
 # 6、域对象共享数据
 
@@ -802,6 +833,12 @@ public String domain2(HttpSession session){
   ```
 
    
+
+## 8.2 springmvc的资源静态过滤问题 
+
+失效的原因是：置DispatcherServlet后就将其覆盖掉了，而DispatcherServlet会将请求的静态资源的名称当 成Controller的映射路径去匹配，但是DispatcherServlet没有静态资源的功能
+
+![image-20231015082058189](C:\Users\Tang\AppData\Roaming\Typora\typora-user-images\image-20231015082058189.png)
 
 # 9.在springMVC中响应或请求数据信息到前端 
 
@@ -1002,6 +1039,10 @@ public String fileUp(MultipartFile filename, HttpSession session) throws IOExcep
 
 # 11.拦截器 过滤器(三个方法)
 
+![image-20231015161609607](C:\Users\Tang\AppData\Roaming\Typora\typora-user-images\image-20231015161609607.png)
+
+
+
 - SpringMVC中的拦截器需要实现HandlerInterceptor
 
 - 想要拦截，还需要配置文件，配置拦截什么路径，指定那个拦截器
@@ -1098,9 +1139,17 @@ public String fileUp(MultipartFile filename, HttpSession session) throws IOExcep
 
 
 
+![image-20231016170523393](C:\Users\Tang\AppData\Roaming\Typora\typora-user-images\image-20231016170523393.png)
+
+
+
 
 
 # 12.异常处理器（监听所有的请求，只要有异常发生，就触发）
+
+![image-20231017143101879](C:\Users\Tang\AppData\Roaming\Typora\typora-user-images\image-20231017143101879.png)
+
+
 
 - 当发生异常时处理异常后做什么（比如：跳到异常界面）
 - SpringMVC提供了一个处理控制器方法执行过程中所出现的异常的接口：HandlerExceptionResolver
