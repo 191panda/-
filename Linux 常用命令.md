@@ -1,4 +1,23 @@
-# Linux 常用命令 
+# 1、Linux的介绍
+
+
+
+## Linux的版本
+
+- 目前存在**数百个**不同的 Linux 发行版
+- CentOS：它专注于提供一个稳定且适用于企业环境的操作系统。
+- Fedora：这是一个由社区驱动的发行版，旨在提供最新的开源软件和技术。Fedora 提供了一个稳定且有创新性的操作系统环境，并激励用户参与到开源社区中。
+- Ubuntu：这是一个非常受欢迎的桌面和服务器发行版，注重易用性和用户友好性。它基于 Debian，提供了广泛的软件支持和强大的社区生态系统。
+
+
+
+
+
+
+
+# 2、Linux 常用命令 
+
+
 
 网络有问题，可能是服务关了
 
@@ -6,7 +25,7 @@
 
 
 
-**Linux的文件系统：**
+## **Linux的文件系统目录：**
 
 /bin        二进制文件，**系统常规命令**
 /boot       系统启动分区，系统启动时读取的文件
@@ -46,7 +65,7 @@ app00   //主机名称
 
 
 
-常用命令：
+## 常用命令：
 
 1. 立刻关机 shutdown -h now
 
@@ -103,7 +122,7 @@ app00   //主机名称
 
 14. 打包文件  `tar -zcvf 打包压缩后的文件名 要打包的文件`
 
-15. 解压文件 ` tar -zxvf a.tar` 解压至当前目录
+15. 解压文件 ` tar -zxvf a.tar` 解压至当前目录 （.tar（打包文件扩展名）  、.gz（压缩包扩展名））
 
 16. 查看网络 `ifconfig` windows 是 `ipconfig`
 
@@ -126,41 +145,53 @@ app00   //主机名称
       修改保存以后使用命令重启网卡：service network restart
     ```
 
-    
+18. make 会读取名为**Makefile**的文件 （其中包含了程序源代码的编译步骤、依赖关系和相关命令）Make会根据Makefile中的规则来自动化执行编译、链接和安装等操作。
+
+    `make install`命令会执行如下操作：
+
+    1. 将编译好的可执行文件、库文件、头文件、文档等文件复制到指定的目录下。这个目录通常是`/usr/local/bin`、`/usr/local/lib`、`/usr/local/include`等。
+
+19. ps -ef | grep redis 查看指定的进程
+
+20. `kill 进程号` 杀死进程
 
 
 
+## Linux下载环境：
+
+Yum 、rpm 都是 Red Hat 系列的 Linux 发行版中的**默认包管理工具**
+
+RPM工具集提供了一组命令行工具，用于处理RPM软件包。常用的RPM工具包括：
+
+1. rpm：**用于在系统上安装、升级、删除和查询软件包**。例如，可以使用`rpm -i package.rpm`命令来安装一个RPM软件包。
+2. yum：是基于RPM的发行版中高层次的软件包管理工具，它可以自动解决软件包依赖关系并从软件源中下载和安装RPM软件包。
+3. dnf：是Fedora和**最新版本的CentOS中取代yum**的软件包管理工具，它提供了与yum类似的功能，并具有改进的性能和用户体验。
+
+> 在CentOS 8及之后的版本中，DNF已经取代了Yum作为默认的包管理工具
 
 
 
+**yum常用命令：**
 
-在Linux中的知识点 ：
+1. yum install <package_name>  命令安装指定的软件包。
 
-1. 打包与解压 ： .tar（打包文件扩展名）  、.gz（压缩包扩展名）
+2. yum update  命令升级系统上已安装的所有软件包到最新版本 `yum update <package_name>` 命令只升级指定的软件包。
+
+3. yum search <key_word> 搜索软件包
+
+4. yum list available 列出可用的软件包
+
+5. yum list installed 列出已安装的软件包
+
+6. yum remove <package_name> 删除软件包 ,会移除软件包及其相关的配置文件和依赖项。
+
+7. yum clean all **删除所有下载的软件包**及其元数据
+
+8. yum info <package_name> 显示软件包信息
+
+   
 
 
-
-Linux下载：
-
-yum:
-
-```
-  说明：安装插件命令
-  yum install httpd      //使用yum安装apache 
-  yum update httpd       //更新apache 
-  yum remove httpd       //卸载/删除apache 
-```
-
-
-
-rpm :
-
-```
-  说明：插件安装命令
-  rpm -ivh httpd-2.2.3-22.0.1.el5.i386.rpm      //使用rpm文件安装apache 
-  rpm -uvh httpd-2.2.3-22.0.1.el5.i386.rpm      //使用rpm更新apache 
-  rpm -ev httpd                                 //卸载/删除apache 
-```
 
 
 
